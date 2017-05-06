@@ -15,11 +15,11 @@ closure over the name variable. Invoke outer saving the return value into
 another variable called 'inner'. */
 
 // Code Here
-
+var inner = outer();
 //Once you do that, invoke inner.
 
 //Code Here
-
+inner;
 
 
 
@@ -35,10 +35,10 @@ another variable called 'inner'. */
 
 
 function callFriend(name) {
-  function dial(number) {
-    return 'Calling ' + name + ' at ' + number
+   function dial(number) {
+    return 'Calling ' + name + ' at ' + number;
   }
-  return dial
+  return dial;
 }
 
 /****** INSTRUCTIONS PROBLEM 2 ******/
@@ -47,8 +47,13 @@ Create a callJake function that when invoked with '435-555-9248' returns 'Callin
 in your console. */
 
   //Code Here
+  function callJake(number){
+    callFriend('Jake');
 
+    return console.log(dial(number));
+  }
 
+callJake("435-555-9248");
 
 
 
