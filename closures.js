@@ -179,35 +179,21 @@ var secondLevelFriends = ["Anne", "Harry", "Quinton"];
 var allUsers = ["Tom", "Dick", "Harry", "Anne", "Quinton", "Katie", "Mary"];
 
 function findPotentialFriends(existingFriends) {
+  var setArray = existingFriends;
   return function(someVar){
-    for (var i = 0; i < existingFriends.length; i++){
-      for (var j = 0; j < someVar.length; j++){
-        if(existingFriends[i] = someVar[i]){
-        return true;
+    for (var i = 0; i < setArray.length; i++){
+        if  (setArray[i] === someVar){
+        return false;
         }
-      }   
-    }
-    return false;
-  }
+      }
+      return true;
+    };
 }
 
 
 var isNotAFriend = findPotentialFriends( friends );
-// isNotAFriend(allUsers[0]); // false
-// isNotAFriend(secondLevelFriends[2]); // true
-
-
-function both(arr1, arr2){
-  var answerArray = [];    
-        for (var i = 0; i < arr1.length; i++){
-          for (var j = 0; j < arr2.length; j++)
-            if (arr1[i] === arr2[j]){
-              answerArray.push(arr1[i]);
-        }
-      }
-  
-  return answerArray;
-}
+isNotAFriend(allUsers[0]); // false
+isNotAFriend(secondLevelFriends[2]); // true
 
 /******************************************************************************\
  #PROBLEM-07 -- BLACK DIAMOND
@@ -216,8 +202,8 @@ function both(arr1, arr2){
 method, find all potential second level friends as well as potential friends
 from allUsers. */
 
-var potentialSecondLevelFriends = "?";
-var allPotentialFriends = "?";
+var potentialSecondLevelFriends = secondLevelFriends.filter(findPotentialFriends(friends));
+var allPotentialFriends = allUsers.filter(findPotentialFriends(friends));
 
 
 /******************************************************************************\
