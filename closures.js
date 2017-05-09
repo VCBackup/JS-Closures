@@ -23,22 +23,15 @@ inner;
 
 
 
-
-
-
-
-
-
 /******************************************************************************\
 	#PROBLEM-02
 \******************************************************************************/
 
 
 function callFriend(name) {
-   function dial(number) {
+  return function(number) {
     return 'Calling ' + name + ' at ' + number;
-  }
-  return dial;
+  };
 }
 
 /****** INSTRUCTIONS PROBLEM 2 ******/
@@ -47,18 +40,11 @@ Create a callJake function that when invoked with '435-555-9248' returns 'Callin
 in your console. */
 
   //Code Here
-  function callJake(number){
-    callFriend('Jake');
-
-    return console.log(dial(number));
+function callJake(number) {
+  var jakeFn = callFriend("Jake");
+  var jakeNumber = jakeFn(number);
+   return jakeNumber;
   }
-
-callJake("435-555-9248");
-
-
-
-
-
 
 
 /******************************************************************************\
@@ -70,21 +56,19 @@ callJake("435-555-9248");
 properly. */
 
 //Code Here
+function makeCounter(){
+  var counter = 1;
+  return function(){
+    return counter++;
+  };
+}
 
 //Uncomment this once you make your function
-//   var count = makeCounter();
-//   count(); // 1
-//   count(); // 2
-//   count(); // 3
-//   count(); // 4
-
-
-
-
-
-
-
-
+  var count = makeCounter();
+  count(); // 1
+  count(); // 2
+  count(); // 3
+  count(); // 4
 
 
 /******************************************************************************\
@@ -101,30 +85,28 @@ Information on the module pattern available here:
 http://stackoverflow.com/questions/17776940/javascript-module-pattern-with-example?answertab=votes#tab-top
 */
 
-function counterFactory(value) {
+function counterFactory(startingValue) {
 
   // Code here.
-
-
+  var currentValue = startingValue;
   return {
-  }
+    inc: function(){
+      currentValue++;
+      return currentValue;
+    },
+    dec: function(){
+      currentValue--;
+      return currentValue;
+    }
+  };
 }
 
 
 counter = counterFactory(10);
-// counter.inc() // 11
-// counter.inc() // 12
-// counter.inc() // 13
-// counter.dec() // 12
-
-
-
-
-
-
-
-
-
+counter.inc(); // 11
+counter.inc(); // 12
+counter.inc(); // 13
+counter.dec(); // 12
 
 /******************************************************************************\
 	#PROBLEM-05
@@ -139,22 +121,16 @@ function motivation(firstname, lastname) {
   var welcomeText = 'You\'re doing awesome, keep it up ';
 
   // code message function here.
-
+  function message(){
+    return welcomeText + firstname + " " + lastname + ".";
+}
 
   //Uncommment this to return the value of your invoked message function
-  //return message();
+  return message();
 
 }
 
 motivation('Billy', 'Bob'); // 'You're doing awesome keep it up Billy Bob.
-
-
-
-
-
-
-
-
 
 
 /******************************************************************************\
@@ -181,6 +157,9 @@ var module = (function() {
   // outside our lexical scope
   return {
     // Code here.
+    publicMethod: function(){
+      return privateMethod();
+    }
   };
 
 })();
@@ -200,13 +179,35 @@ var secondLevelFriends = ["Anne", "Harry", "Quinton"];
 var allUsers = ["Tom", "Dick", "Harry", "Anne", "Quinton", "Katie", "Mary"];
 
 function findPotentialFriends(existingFriends) {
-
+  return function(someVar){
+    for (var i = 0; i < existingFriends.length; i++){
+      for (var j = 0; j < someVar.length; j++){
+        if(existingFriends[i] = someVar[i]){
+        return true;
+        }
+      }   
+    }
+    return false;
+  }
 }
+
 
 var isNotAFriend = findPotentialFriends( friends );
 // isNotAFriend(allUsers[0]); // false
 // isNotAFriend(secondLevelFriends[2]); // true
 
+
+function both(arr1, arr2){
+  var answerArray = [];    
+        for (var i = 0; i < arr1.length; i++){
+          for (var j = 0; j < arr2.length; j++)
+            if (arr1[i] === arr2[j]){
+              answerArray.push(arr1[i]);
+        }
+      }
+  
+  return answerArray;
+}
 
 /******************************************************************************\
  #PROBLEM-07 -- BLACK DIAMOND
